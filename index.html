@@ -59,12 +59,15 @@
 
     <script>
       document.querySelector("a-scene").addEventListener("arReady", () => {
-        const video = document.querySelector("#video");
-        video.play().catch((e) => {
-          console.warn("Autoplay failed:", e);
+        ["#video1", "#video2", "#video3"].forEach((id) => {
+          const video = document.querySelector(id);
+          video.play().catch((e) => {
+            console.warn("Autoplay failed for", id, e);
+          });
         });
       });
     </script>
+    
     <a href="https://prove-me-wrong.com/" target="_blank" class="home-link">Homepage</a>
   </body>
 </html>
