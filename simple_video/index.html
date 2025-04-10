@@ -1,0 +1,73 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+    <style>
+      .home-link {
+        position: fixed;
+        bottom: 10px;
+        left: 10px;
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        font-size: 16px;
+        z-index: 1000;  /* Ensure it's on top */
+      }
+    </style>
+  </head>
+  <body>
+    <a-scene
+      mindar-image="imageTargetSrc: ./targets.mind"
+      color-space="sRGB"
+      renderer="colorManagement: true, physicallyCorrectLights"
+      vr-mode-ui="enabled: false"
+      device-orientation-permission-ui="enabled: false"
+    >
+      <a-assets>
+        <video id="video1" src="Triangle_Groups/Poincare.m4v"   autoplay loop muted playsinline crossorigin="anonymous"></video>
+        <video id="video2" src="Triangle_Groups/Hyperbolic.m4v" autoplay loop muted playsinline crossorigin="anonymous"></video>
+        <video id="video3" src="Triangle_Groups/Spherical.m4v"  autoplay loop muted playsinline crossorigin="anonymous"></video>
+      </a-assets>
+
+      <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+
+      <a-entity mindar-image-target="targetIndex: 0">
+        <a-video
+          src="#video1"
+          width="1" height="1"
+          position="-1.1 0 0"
+          rotation="0 0 0"
+        ></a-video>
+        <a-video
+          src="#video2"
+          width="1" height="1"
+          position="0 0 0"
+          rotation="0 0 0"
+        ></a-video>
+        <a-video
+          src="#video3"
+          width="1" height="1"
+          position="1.1 0 0"
+          rotation="0 0 0"
+        ></a-video>
+      </a-entity>
+
+    </a-scene>
+
+    <script>
+      document.querySelector("a-scene").addEventListener("arReady", () => {
+        ["#video1", "#video2", "#video3"].forEach((id) => {
+          const video = document.querySelector(id);
+          video.play().catch((e) => {
+            console.warn("Autoplay failed for", id, e);
+          });
+        });
+      });
+    </script>
+    
+    <a href="https://prove-me-wrong.com/" target="_blank" class="home-link">Homepage</a>
+  </body>
+</html>
