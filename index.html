@@ -27,28 +27,34 @@
       device-orientation-permission-ui="enabled: false"
     >
       <a-assets>
-        <video
-          id="video"
-          src="Rotating-Squares.m4v"
-          autoplay
-          loop
-          muted
-          playsinline
-          crossorigin="anonymous"
-        ></video>
+        <video id="video1" src="Triangle_Groups/Poincare.m4v"   autoplay loop muted playsinline crossorigin="anonymous"></video>
+        <video id="video2" src="Triangle_Groups/Hyperbolic.m4v" autoplay loop muted playsinline crossorigin="anonymous"></video>
+        <video id="video3" src="Triangle_Groups/Spherical.m4v"  autoplay loop muted playsinline crossorigin="anonymous"></video>
       </a-assets>
 
       <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
 
       <a-entity mindar-image-target="targetIndex: 0">
         <a-video
-          src="#video"
+          src="#video1"
+          width="1" height="1"
+          position="-1.1 0 0"
+          rotation="0 0 0"
+        ></a-video>
+        <a-video
+          src="#video2"
+          width="1" height="1"
           position="0 0 0"
-          width="2"
-          height="2"
+          rotation="0 0 0"
+        ></a-video>
+        <a-video
+          src="#video3"
+          width="1" height="1"
+          position="1.1 0 0"
           rotation="0 0 0"
         ></a-video>
       </a-entity>
+
     </a-scene>
 
     <script>
