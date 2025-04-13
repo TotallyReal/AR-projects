@@ -2,47 +2,42 @@
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/aframe-extras@6.1.1/dist/aframe-extras.min.js"></script>
-    <script>
-      // Ensure AR session starts automatically
-      AFRAME.registerComponent('start-ar', {
-        init: function () {
-          const sceneEl = this.el;
-          sceneEl.renderer.xr.enabled = true;
-          sceneEl.renderer.xr.setReferenceSpaceType('local');
-
-          navigator.xr.requestSession('immersive-ar', {
-            requiredFeatures: ['hit-test', 'local-floor']
-          }).then(session => {
-            sceneEl.renderer.xr.setSession(session);
-          }).catch(err => {
-            console.error('Failed to start AR session:', err);
-          });
-        }
-      });
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+    <style>
+      .home-link {
+        position: fixed;
+        bottom: 10px;
+        left: 10px;
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        font-size: 16px;
+        z-index: 1000;
+      }
+    </style>
   </head>
-  <body style="margin: 0; overflow: hidden">
+  <body>
     <a-scene
-      start-ar
-      renderer="colorManagement: true, physicallyCorrectLights: true"
-      embedded
-      xr-mode="immersive-ar"
+      mindar="type: empty;"
       vr-mode-ui="enabled: false"
-      arjs="sourceType: webcam;"
+      device-orientation-permission-ui="enabled: false"
     >
       <a-assets>
         <a-asset-item id="model" src="model.glb"></a-asset-item>
       </a-assets>
 
-      <a-camera position="0 0 0" wasd-controls-enabled="false" look-controls-enabled="false"></a-camera>
+      <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
 
+      <!-- Model appears 0.5 meters in front of the user -->
       <a-entity
-        gltf-model="#model"
         position="0 0 -0.5"
-        scale="0.2 0.2 0.2"
-        rotation="0 180 0"
+        gltf-model="#model"
+        scale="0.5 0.5 0.5"
       ></a-entity>
     </a-scene>
+
+    <a href="https://yourhomepage.com" target="_blank" class="home-link">Homepage 3</a>
   </body>
 </html>
