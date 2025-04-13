@@ -2,7 +2,6 @@
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
     <style>
       .home-link {
         position: fixed;
@@ -14,41 +13,31 @@
         text-decoration: none;
         border-radius: 5px;
         font-size: 16px;
-        z-index: 1000;  /* Ensure it's on top */
+        z-index: 1000;
       }
     </style>
   </head>
   <body>
     <a-scene
-      mindar="type: empty;"
+      embedded
       vr-mode-ui="enabled: false"
       device-orientation-permission-ui="enabled: false"
     >
       <a-assets>
-        <video id="video" src="Triangle_Groups/Hyperbolic.m4v" autoplay loop muted playsinline crossorigin="anonymous"></video>
+        <a-asset-item id="model" src="model.glb"></a-asset-item>
       </a-assets>
 
       <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
 
-      <!-- Video in AR, placed 0.5 meters ahead of the camera -->
-      <a-entity position="0 0 -0.5">
-        <a-video
-          src="#video"
-          width="2"
-          height="2"
-          rotation="0 0 0"
-        ></a-video>
-      </a-entity>
+      <!-- Model placed 0.5 meters in front of the camera -->
+      <a-entity
+        gltf-model="#model"
+        position="0 0 -0.5"
+        scale="0.5 0.5 0.5"
+        rotation="0 45 0"
+      ></a-entity>
     </a-scene>
 
-    <script>
-      document.querySelector("a-scene").addEventListener("arReady", () => {
-        const video = document.querySelector("#video");
-        video.play().catch((e) => {
-          console.warn("Autoplay failed:", e);
-        });
-      });
-    </script>
     <a href="https://prove-me-wrong.com/" target="_blank" class="home-link">Homepage</a>
   </body>
 </html>
